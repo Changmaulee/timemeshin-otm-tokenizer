@@ -1,0 +1,14 @@
+{
+  "tokenizer_class": "TimeMeshOTMTokenizer",
+  "auto_map": {
+    "AutoTokenizer": [
+      "tokenizer.TimeMeshOTMTokenizer",
+      null
+    ]
+  },
+  "model_max_length": 2048,
+  "unk_token": "<unk>",
+  "pad_token": "<pad>",
+  "bos_token": "<bos>",
+  "eos_token": "<eos>"
+}
