@@ -12,13 +12,13 @@
 
 ## 📌 Executive Summary
 
-Modern Large Language Models (LLMs) suffer from the **"Indic & Multilingual Token Tax"**: conventional statistical tokenizers (BPE, SentencePiece, WordPiece) sever non-Latin scripts, vowel modifiers (*matras*), and conjunct consonants into 5–9 raw byte tokens per word. This artificially bloats prompt sequence lengths, exhausts context windows, inflates inference costs, and creates severe attention degradation.
+Modern Large Language Models (LLMs) often face the **"Indic & Multilingual Token Tax"**: conventional statistical tokenizers (BPE, SentencePiece, WordPiece) sever non-Latin scripts, vowel modifiers (*matras*), and conjunct consonants into 5–9 raw byte tokens per word. This increases prompt sequence lengths, consumes context windows faster, and elevates inference costs.
 
-**TimeMeshin-OTM (Ordered Transition Mesh)** solves this by replacing blind statistical byte merging with a deterministic **I/P/B-Frame Hierarchical Architecture**:
-* **Indivisible Akshara & Glyph Bounds:** Enforces phonetic syllable boundaries for Indic/Dravidian scripts and atomic character blocks for CJK, completely preventing sub-character byte shredding.
+While prior pioneering efforts (such as Timegravity and large-vocabulary models) addressed this by expanding the vocabulary to 250k+ tokens, **TimeMeshin-OTM (Ordered Transition Mesh)** explores a complementary, **parameter-efficient structural approach**:
+* **Indivisible Akshara & Glyph Bounds:** Enforces phonetic syllable boundaries for Indic/Dravidian scripts and atomic character blocks for CJK, preventing sub-character byte shredding.
 * **Macro Concept Frames (I-Frames):** Identifies recurring multi-word collocations and compounds, collapsing them into single atomic tokens (**0.36 – 0.69 tokens/word**).
 * **Agglutinative Sandhi Deltas (P-Frames):** Decomposes complex inflections into Root + Suffix deltas in minimal causal hops.
-* **Ultra-Compact Vocabulary:** Achieves superior fertility using only **~6,000 tokens**—beating 270,000-vocabulary baselines without wasting GPU VRAM on bloated embedding tables.
+* **Ultra-Compact Vocabulary:** Achieves high compression density using an ultra-compact **~6,000 token vocabulary**, keeping embedding tables lightweight and suitable for edge and enterprise deployments.
 
 ---
 
@@ -135,15 +135,16 @@ print("Decoded:  ", decoded_str)
 
 ---
 
-## ⚖️ Architectural Comparison: TimeMeshin-OTM vs. Industry Baselines
+## ⚖️ Architectural Comparison: Structural Frames vs. Vocabulary Expansion
 
-| Dimension | Conventional BPE (SentencePiece) | Timegravity (Massive Vocab) | TimeMeshin-OTM (Our Method) |
+| Dimension | Standard Byte-Level BPE | Large-Vocabulary Expansion (e.g., Timegravity, Qwen) | TimeMeshin-OTM (Structural Frames) |
 | :--- | :--- | :--- | :--- |
-| **Indic Syllable Integrity** | ❌ Shreds into raw bytes | ⚠️ Memorizes whole words |  **Enforces Akshara boundaries** |
-| **Unseen Indic Words** | 5.50 – 9.75 tok/word | 1.92 tok/word | **1.08 – 1.12 tok/word** |
-| **Vocabulary Size** | 32,000 – 128,000 | **270,000+** | **~6,000 (Ultra-Compact)** |
-| **Embedding VRAM Overhead** | Medium (~500 MB) | High (**1.1+ GB**) | **Low (< 50 MB)** |
-| **Attention $O(N^2)$ Compute** | Baseline | Moderate | **~2x to 4x Faster (64%+ shorter seq)** |
+| **Design Philosophy** | Statistical subword frequency | Extensive vocabulary scaling (250k+ tokens) | Multi-scale structural & causal frames |
+| **Indic Syllable Handling** | Sub-syllable byte slices | Whole-word lexical entries | Phonetic Akshara cluster preservation |
+| **Unseen Out-of-Distribution Words** | 5.50 – 9.75 tokens/word | ~1.92 tokens/word | **1.08 – 1.12 tokens/word** |
+| **Vocabulary Size** | 32k – 128k tokens | 250k – 270k+ tokens | **~6,000 tokens (Ultra-compact)** |
+| **GPU Memory Footprint** | Standard | Requires larger embedding table | Minimal embedding table overhead |
+| **Core Advantage** | Baseline compatibility | High lexical coverage | Parameter efficiency & low sequence length |
 
 ---
 
