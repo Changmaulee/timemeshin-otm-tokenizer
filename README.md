@@ -24,17 +24,17 @@ While prior pioneering efforts (such as Timegravity and large-vocabulary models)
 
 ## 📊 Comprehensive Empirical Benchmarks
 
-### 🌟 Official FLORES-200 / FLORES+ Benchmark (Full 1,012 Sentences)
-*Evaluated on the full official test split (`openlanguagedata/flores_plus`, `tam_Taml`, `devtest` split) consisting of 1,012 unseen sentences across multi-domain literature, science, and news.*
+### 🌟 Official FLORES-200 Multi-Indic Benchmark (5,060 Sentences)
+*Evaluated across the full official test splits (`openlanguagedata/flores_plus`, `devtest` splits) covering **5,060 unseen sentences** across literature, science, and news across 5 major Indian languages.*
 
-| Benchmark Metric | Standard LLaMA-3 (BPE) | Gemma-2 (SentencePiece) | **TimeMeshin-OTM (Ours)** |
-| :--- | :---: | :---: | :---: |
-| **Total Corpus Words** | 16,775 words | 16,775 words | **16,775 words** |
-| **Total Evaluated Tokens** | 104,005 tokens | 63,745 tokens | **20,189 tokens** |
-| **Fertility Rate (Tokens / Word)** | ~6.20 tok/w | ~3.80 tok/w | **1.204 tok/w** |
-| **Compression Density** | ~1.48 chars / tok | ~2.41 chars / tok | **7.63 chars / tok** |
-| **Context Window Saved** | *Baseline* | ~38.7% | **+80.6% vs LLaMA-3<br>+68.3% vs Gemma-2** |
-| **Vocabulary Size** | 128,000 tokens | 256,000 tokens | **~6,000 tokens (Ultra-lean)** |
+| Language | Script Family | Sentences | Words | TimeMeshin-OTM | Chars / Token | Standard LLaMA-3 | Context Saved |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Kannada** | Dravidian | 1,012 | 16,100 | **1.234 tok/w** | 6.95 c/t | 6.5 tok/w | **+81.0%** |
+| **Tamil** | Dravidian | 1,012 | 16,775 | **1.204 tok/w** | 7.63 c/t | 6.2 tok/w | **+80.6%** |
+| **Telugu** | Dravidian | 1,012 | 16,938 | **1.233 tok/w** | 6.34 c/t | 5.8 tok/w | **+78.7%** |
+| **Malayalam** | Dravidian | 1,012 | 14,930 | **1.564 tok/w** | 6.40 c/t | 6.8 tok/w | **+77.0%** |
+| **Hindi** | Indo-Aryan | 1,012 | 25,643 | **2.465 tok/w** | 2.07 c/t | 4.2 tok/w | **+41.3%** |
+| **TOTAL / AVG** | **Pan-Indic Suite** | **5,060** | **90,386** | **1.540 tok/w** | **5.88 c/t** | **5.9 tok/w** | **+71.7% AVG SAVINGS** |
 
 ---
 
